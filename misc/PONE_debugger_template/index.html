@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="columns">
+
+        <div class="debug-column" style="width: 450px; height: 350px;">
+            <label class="debug-column-header">VGA monior</label>
+
+            <div class="vga-monitor-template"></div>
+
+        </div>
+
+        <div class="debug-column" style="width: 100%; height: 300px;">
+            <label class="debug-column-header">Control</label>
+            <label>Status: Running</label>
+
+            <div class="button-group" style="width: 400px;">
+                <button type="button" class="btn btn-success">Start</button>
+                <button type="button" class="btn btn-warning">Stop</button>
+                <button type="button" class="btn btn-danger">Reset</button>
+            </div>
+
+        </div>
+
+        <div class="debug-column" style="height: 100%;">
+            <label class="debug-column-header">Source code</label>
+
+            <iframe src="app.txt" height="750px" width="700">
+                Your Browser doesn't support Frames.
+              </iframe>
+        </div>
+
+        <div class="debug-column" style="height: 100%;">
+            <label class="debug-column-header">History</label>
+
+            <iframe src="history.txt" height="750px" width="700">
+                Your Browser doesn't support Frames.
+              </iframe>
+        </div>
+
+        <div class="debug-column" style="height: 100%;">
+            <label class="debug-column-header">Register file (simulated)</label>
+
+            <table style="width: 300px; height: 750px; margin-top: 50px;">
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                <tr><th>0 (zero): 0x00000000</th></tr>
+                
+            </table>
+
+        </div>
+
+
+
+
+    </div>
+
+</body>
+</html>

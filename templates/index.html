@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask</title>
+    <link type="text/css" rel="stylesheet" href="{{ url_for("static", filename="css/main.css") }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for("static", filename="css/bootstrap.min.css") }}">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}" defer></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+    <div class="contaiener">
+        <div class="box">
+            <div class="vga">
+                <div class="monitor">
+                    <img class="image ananas" style="filter:invert(1);" src="/static/img.png">
+                    <img class="image hidden vga-output" src="">
+                </div>
+
+                <div class="stand-first"></div>
+                <div class="stand-second"></div>
+
+                <!-- <div class="buttons">
+                    <div class="btn-group">
+                        <button class="btn btn-dark btn-sm start">Start</button>
+                        <button class="btn btn-dark btn-sm stop">Stop</button>
+                        <button class="btn btn-dark btn-sm restart">Restart</button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+{#        <img class="pineapple" src="https://pbs.twimg.com/media/Ex5sEWQWQAMSxzd.jpg:large">#}
+
+
+    </div>
+</body>
+</html>

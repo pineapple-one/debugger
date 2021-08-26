@@ -1,0 +1,139 @@
+
+build/APP.elf:     file format elf32-littleriscv
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000001a0  00000000  00000000  00001000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .rodata       00000000  000001a0  000001a0  000011a0  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .data         00000000  00000000  000001a0  000011a0  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .bss          00000000  00000000  00000000  00000000  2**0
+                  ALLOC
+  4 ._user_heap_stack 00000600  00000000  000001a0  00002000  2**0
+                  ALLOC
+  5 .comment      00000034  00000000  00000000  000011a0  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	00080137          	lui	sp,0x80
+   4:	ffc10113          	addi	sp,sp,-4 # 7fffc <_estack>
+   8:	00c000ef          	jal	ra,14 <main>
+   c:	0040006f          	j	10 <_exit>
+
+00000010 <_exit>:
+  10:	0000006f          	j	10 <_exit>
+
+00000014 <main>:
+  14:	ff010113          	addi	sp,sp,-16
+  18:	00112623          	sw	ra,12(sp)
+  1c:	00812423          	sw	s0,8(sp)
+  20:	01010413          	addi	s0,sp,16
+  24:	f0f0f7b7          	lui	a5,0xf0f0f
+  28:	0f078593          	addi	a1,a5,240 # f0f0f0f0 <_estack+0xf0e8f0f4>
+  2c:	00000513          	li	a0,0
+  30:	04c000ef          	jal	ra,7c <vram_write_32b>
+  34:	0000006f          	j	34 <main+0x20>
+
+00000038 <vram_write_8b>:
+  38:	fd010113          	addi	sp,sp,-48
+  3c:	02812623          	sw	s0,44(sp)
+  40:	03010413          	addi	s0,sp,48
+  44:	fca42e23          	sw	a0,-36(s0)
+  48:	00058793          	mv	a5,a1
+  4c:	fcf40da3          	sb	a5,-37(s0)
+  50:	fdc42703          	lw	a4,-36(s0)
+  54:	400007b7          	lui	a5,0x40000
+  58:	00f707b3          	add	a5,a4,a5
+  5c:	fef42623          	sw	a5,-20(s0)
+  60:	fec42783          	lw	a5,-20(s0)
+  64:	fdb44703          	lbu	a4,-37(s0)
+  68:	00e78023          	sb	a4,0(a5) # 40000000 <_estack+0x3ff80004>
+  6c:	00000013          	nop
+  70:	02c12403          	lw	s0,44(sp)
+  74:	03010113          	addi	sp,sp,48
+  78:	00008067          	ret
+
+0000007c <vram_write_32b>:
+  7c:	fd010113          	addi	sp,sp,-48
+  80:	02812623          	sw	s0,44(sp)
+  84:	03010413          	addi	s0,sp,48
+  88:	fca42e23          	sw	a0,-36(s0)
+  8c:	fcb42c23          	sw	a1,-40(s0)
+  90:	fdc42703          	lw	a4,-36(s0)
+  94:	400007b7          	lui	a5,0x40000
+  98:	00f707b3          	add	a5,a4,a5
+  9c:	fef42623          	sw	a5,-20(s0)
+  a0:	fec42783          	lw	a5,-20(s0)
+  a4:	fd842703          	lw	a4,-40(s0)
+  a8:	00e7a023          	sw	a4,0(a5) # 40000000 <_estack+0x3ff80004>
+  ac:	00000013          	nop
+  b0:	02c12403          	lw	s0,44(sp)
+  b4:	03010113          	addi	sp,sp,48
+  b8:	00008067          	ret
+
+000000bc <delay>:
+  bc:	fe010113          	addi	sp,sp,-32
+  c0:	00812e23          	sw	s0,28(sp)
+  c4:	02010413          	addi	s0,sp,32
+  c8:	fe042623          	sw	zero,-20(s0)
+  cc:	0100006f          	j	dc <delay+0x20>
+  d0:	fec42783          	lw	a5,-20(s0)
+  d4:	00178793          	addi	a5,a5,1
+  d8:	fef42623          	sw	a5,-20(s0)
+  dc:	fec42703          	lw	a4,-20(s0)
+  e0:	000027b7          	lui	a5,0x2
+  e4:	70f78793          	addi	a5,a5,1807 # 270f <_Min_Stack_Size+0x230f>
+  e8:	fee7d4e3          	bge	a5,a4,d0 <delay+0x14>
+  ec:	00000013          	nop
+  f0:	00000013          	nop
+  f4:	01c12403          	lw	s0,28(sp)
+  f8:	02010113          	addi	sp,sp,32
+  fc:	00008067          	ret
+
+00000100 <VGA_clear>:
+ 100:	fe010113          	addi	sp,sp,-32
+ 104:	00112e23          	sw	ra,28(sp)
+ 108:	00812c23          	sw	s0,24(sp)
+ 10c:	02010413          	addi	s0,sp,32
+ 110:	fe042623          	sw	zero,-20(s0)
+ 114:	0200006f          	j	134 <VGA_clear+0x34>
+ 118:	fec42783          	lw	a5,-20(s0)
+ 11c:	00000593          	li	a1,0
+ 120:	00078513          	mv	a0,a5
+ 124:	f59ff0ef          	jal	ra,7c <vram_write_32b>
+ 128:	fec42783          	lw	a5,-20(s0)
+ 12c:	00478793          	addi	a5,a5,4
+ 130:	fef42623          	sw	a5,-20(s0)
+ 134:	fec42703          	lw	a4,-20(s0)
+ 138:	000017b7          	lui	a5,0x1
+ 13c:	35578793          	addi	a5,a5,853 # 1355 <_Min_Stack_Size+0xf55>
+ 140:	fce7dce3          	bge	a5,a4,118 <VGA_clear+0x18>
+ 144:	00000013          	nop
+ 148:	00000013          	nop
+ 14c:	01c12083          	lw	ra,28(sp)
+ 150:	01812403          	lw	s0,24(sp)
+ 154:	02010113          	addi	sp,sp,32
+ 158:	00008067          	ret
+
+0000015c <VGA_power>:
+ 15c:	fe010113          	addi	sp,sp,-32
+ 160:	00812e23          	sw	s0,28(sp)
+ 164:	02010413          	addi	s0,sp,32
+ 168:	00050793          	mv	a5,a0
+ 16c:	fef407a3          	sb	a5,-17(s0)
+ 170:	fef44783          	lbu	a5,-17(s0)
+ 174:	00078863          	beqz	a5,184 <VGA_power+0x28>
+ 178:	fef44703          	lbu	a4,-17(s0)
+ 17c:	00100793          	li	a5,1
+ 180:	00f71863          	bne	a4,a5,190 <VGA_power+0x34>
+ 184:	800007b7          	lui	a5,0x80000
+ 188:	fef44703          	lbu	a4,-17(s0)
+ 18c:	00e780a3          	sb	a4,1(a5) # 80000001 <_estack+0x7ff80005>
+ 190:	00000013          	nop
+ 194:	01c12403          	lw	s0,28(sp)
+ 198:	02010113          	addi	sp,sp,32
+ 19c:	00008067          	ret

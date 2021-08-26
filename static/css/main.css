@@ -1,0 +1,87 @@
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.box .vga .monitor {
+  width: 65vw;
+  height: calc(65vw / 1.77);
+  overflow-y: scroll;
+  border: solid 1em #333;
+  border-radius: 0.5em;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.box .vga .monitor .image {
+  height: 95%;
+  image-rendering: crisp-edges;
+}
+
+
+.box .vga .stand-first {
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  background: #222;
+  width: 20%;
+  height: calc(65vw / 25);
+}
+.box .vga .stand-second {
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  background: #333;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+  width: 50%;
+  height: 15px;
+}
+.box .vga .buttons {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.box .vga .buttons .btn-group {
+  width: 30%;
+}
+
+h1 {
+  position: absolute;
+  font-family: "Squada One", cursive;
+  font-size: 5rem;
+}
+
+.pineapple {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  width: 100px;
+  transition: 0.5s all;
+}
+
+.hidden {
+  display: none;
+}
+
+.hidden-animation {
+  transform: scale(0) !important;
+}
+
+.ananas {
+  transition: 0.5s all;
+}
+
+.ananas:hover {
+  transform: scale(0.8);
+}
+
+.pineapple:hover {
+  transform: scale(1.2);
+}
+
+/*# sourceMappingURL=main.css.map */
