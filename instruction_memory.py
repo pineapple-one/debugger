@@ -52,10 +52,6 @@ class InstructionMemory(Block):
         if self.data.instruction == 0x6f:
             self.data.running = False
             
-
-
-
-
         # if self.data.instruction == 0x00e7a023:
         #     input()
 
