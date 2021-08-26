@@ -2,7 +2,6 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 from pineapple import Pineapple
 import logging
-import serial
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)

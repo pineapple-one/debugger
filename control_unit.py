@@ -136,7 +136,7 @@ class ControlUnit(Block):
         if self.data.CPU_BUSY == 0:
             if self.data.PCE == 1: 
                 self.data.uCounter = 0
-                self.uCounter_reset_delay = 1 # Potřebný delay po resetu uCounteru pro podmínku výše
+                self.uCounter_reset_delay = 1  # Potřebný delay po resetu uCounteru pro podmínku výše
                 self.clear_opcodes()
                 self.instruction()
                 # logger.info("")
@@ -342,5 +342,3 @@ class ControlUnit(Block):
 #     for i in range(10):
 #         c.clock_up()
 #         c.clock_down()
-
-

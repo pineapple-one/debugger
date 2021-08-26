@@ -32,7 +32,6 @@ class Readers:
     MODULE_IO_BITS = 8
     MODULE_IO_COUNT = 4
 
-
     S_TO_NS_DIVIDER = 1_000_000_000
 
     def __init__(self, clock_pin: int, load_pin: int, data_pin: int) -> None:
@@ -98,7 +97,6 @@ if __name__ == "__main__":
                 # uart.write(posilam_filipovi)
                 print(cpu_data)
 
-
             elif command == CMD_CLOCK_UP:
                 clock.on()
 
@@ -119,5 +117,3 @@ if __name__ == "__main__":
 
                 # uart.write(bytes([RESP_OK]))
                 print(bytes([RESP_OK]))
-
-

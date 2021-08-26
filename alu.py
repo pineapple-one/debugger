@@ -42,7 +42,6 @@ class ALU(Block):
         self.at_clock()
 
     def at_clock(self):
-
         result = 0
 
         prepared_instruction = bin(self.data.instruction)[2:].zfill(32)
@@ -145,7 +144,6 @@ class ALU(Block):
 
         # if ALU_should_be != result:
         #     # logger.error("ALU error!!")
-
 
 # if __name__ == '__main__':
 #     f3 = 0b000

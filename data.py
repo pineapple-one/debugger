@@ -68,4 +68,3 @@ class Data:
 
         # RAM out
         self.ram_out = 0b00000000000000000000000000000000
-
