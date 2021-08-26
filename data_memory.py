@@ -31,12 +31,8 @@ class DataMemory(Block):
         # if current - self.last_time > 0.1:
         #     self.last_time = current
 
-        binary = []
-        for x in self.VRAM:
-            bit_array = bin(x).lstrip("0b").zfill(8)[::-1]
-
-            for i in bit_array:
-                binary.append(int(i) * 255)
+        # Reverse the bit ordering
+        binary = np.unpackbits(self.VRAM).reshape(-1, 8)[:, ::-1] * 255
 
         reshaped = np.reshape(binary, (256, 256))
         cropped = np.array(reshaped[0:150, 0:200])
