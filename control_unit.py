@@ -134,7 +134,7 @@ class ControlUnit(Block):
 
     def clock_up(self) -> None:
         if self.data.CPU_BUSY == 0:
-            if self.data.PCE == 1: 
+            if self.data.PCE == 1:
                 self.data.uCounter = 0
                 self.uCounter_reset_delay = 1  # Potřebný delay po resetu uCounteru pro podmínku výše
                 self.clear_opcodes()
@@ -143,18 +143,18 @@ class ControlUnit(Block):
                 # logger.info(f"uCounter updated to: {self.data.uCounter}")
                 # print(f"uCounter updated to: {self.data.uCounter}")
             self.decoder()
-    
+
     def clock_down(self) -> None:
         if self.data.CPU_BUSY == 0:
             self.clear_opcodes()
             # if self.uCounter_reset_delay == 1: # Jeden takt se nesmí vykonat nic = po resetu uCounteru
             #     self.uCounter_reset_delay = 0
-            
+
             # else:
             # logger.info(f"uCounter updated to: {self.data.uCounter}")
             # print(f"uCounter updated to: {self.data.uCounter}")
             # self.__socketio.emit("u_counter", self.data.uCounter, namespace="/pineapple")
-            self.instruction()            
+            self.instruction()
             self.data.uCounter += 1
 
             self.decoder()
@@ -182,7 +182,7 @@ class ControlUnit(Block):
     #         self.decoder()
 
     #     print(f"-------- up, uC: {self.data.uCounter}")
-    
+
     # def clock_down(self) -> None:
     #     if self.data.CPU_BUSY == 0:
 
@@ -232,31 +232,31 @@ class ControlUnit(Block):
 
             elif i == "ALU_OP_1":
                 self.data.ALU_OP_1 = 1
-                
+
             elif i == "TAKE_BRANCH":
                 self.data.TAKE_BRANCH = 1
-                
+
             elif i == "PC_SRC_1":
                 self.data.PC_SRC_1 = 1
-            
+
             elif i == "IMM_GEN_CTR_0":
                 self.data.IMM_GEN_CTR_0 = 1
-            
+
             elif i == "IMM_GEN_CTR_1":
                 self.data.IMM_GEN_CTR_1 = 1
 
             elif i == "RF_STORE":
                 self.data.RF_STORE = 1
-                
+
             elif i == "ALU_G":
                 self.data.ALU_G = 1
-                
+
             elif i == "PCE":
                 self.data.PCE = 1
-            
+
             elif i == "ALU_SRC":
                 self.data.ALU_SRC = 1
-            
+
             elif i == "SH_LOAD":
                 self.data.SH_LOAD = 1
 
@@ -275,24 +275,24 @@ class ControlUnit(Block):
             # TODO reset všech ostatních na nulu (funkce dole)
 
     def clear_opcodes(self) -> None:
-        self.data.ALU_OP_0 = 0       # 0
-        self.data.MEM_STORE = 0      # 1
-        self.data.RTB_SEL_0 = 0      # 2
-        self.data.PC_SRC_0 = 0       # 3
-        self.data.RTB_SEL_1 = 0      # 4
-        self.data.ALU_OP_1 = 0       # 5
-        self.data.TAKE_BRANCH = 0    # 6
-        self.data.PC_SRC_1 = 0       # 7
+        self.data.ALU_OP_0 = 0  # 0
+        self.data.MEM_STORE = 0  # 1
+        self.data.RTB_SEL_0 = 0  # 2
+        self.data.PC_SRC_0 = 0  # 3
+        self.data.RTB_SEL_1 = 0  # 4
+        self.data.ALU_OP_1 = 0  # 5
+        self.data.TAKE_BRANCH = 0  # 6
+        self.data.PC_SRC_1 = 0  # 7
         self.data.IMM_GEN_CTR_0 = 0  # 8
         self.data.IMM_GEN_CTR_1 = 0  # 9
-        self.data.RF_STORE = 0       # 10
-        self.data.ALU_G = 0          # 11
-        self.data.PCE = 0            # 12
-        self.data.ALU_SRC = 0        # 14
-        self.data.SH_LOAD = 0        # 16
-        self.data.SH_LATCH = 0       # 17
-        self.data.RF_LOAD = 0        # 18
-        self.data.MEM_LOAD = 0       # 19
+        self.data.RF_STORE = 0  # 10
+        self.data.ALU_G = 0  # 11
+        self.data.PCE = 0  # 12
+        self.data.ALU_SRC = 0  # 14
+        self.data.SH_LOAD = 0  # 16
+        self.data.SH_LATCH = 0  # 17
+        self.data.RF_LOAD = 0  # 18
+        self.data.MEM_LOAD = 0  # 19
         self.data.IMM_GEN_CTR_2 = 0  # 20
 
     def cu_reset(self) -> None:
@@ -307,30 +307,29 @@ class ControlUnit(Block):
         if self.data.SH_RTB_EN == 0:
             self.data.REG_RTB_G = 1
             self.data.IMM_RTB_G = 1
-            self.data.PC_RTB_G = 1 
+            self.data.PC_RTB_G = 1
 
         elif self.data.SH_RTB_EN == 1 and (self.data.RTB_SEL_0 == 0 and self.data.RTB_SEL_1 == 0):
             self.data.REG_RTB_G = 0
             self.data.IMM_RTB_G = 1
-            self.data.PC_RTB_G = 1 
+            self.data.PC_RTB_G = 1
 
         elif self.data.SH_RTB_EN == 1 and (self.data.RTB_SEL_0 == 0 and self.data.RTB_SEL_1 == 1):
             self.data.REG_RTB_G = 1
             self.data.IMM_RTB_G = 1
-            self.data.PC_RTB_G = 0 
+            self.data.PC_RTB_G = 0
 
         elif self.data.SH_RTB_EN == 1 and (self.data.RTB_SEL_0 == 1 and self.data.RTB_SEL_1 == 0):
             self.data.REG_RTB_G = 1
             self.data.IMM_RTB_G = 0
-            self.data.PC_RTB_G = 1 
+            self.data.PC_RTB_G = 1
 
         elif self.data.SH_RTB_EN == 1 and (self.data.RTB_SEL_0 == 1 and self.data.RTB_SEL_1 == 1):
             self.data.REG_RTB_G = 1
             self.data.IMM_RTB_G = 1
-            self.data.PC_RTB_G = 1 
+            self.data.PC_RTB_G = 1
 
-        # logger.info(f"REG_RTB_G --> {self.data.REG_RTB_G} | IMM_RTB_G --> {self.data.IMM_RTB_G} | PC_RTB_G --> {self.data.PC_RTB_G}")
-
+            # logger.info(f"REG_RTB_G --> {self.data.REG_RTB_G} | IMM_RTB_G --> {self.data.IMM_RTB_G} | PC_RTB_G --> {self.data.PC_RTB_G}")
 
 # if __name__ == "__main__":
 #     d = Data()

@@ -260,7 +260,6 @@ class DataMemory(Block):
             # print(f"Load: {bin(prepared_data)}")
             self.data.ram_out = prepared_data
 
-
 # if __name__ == '__main__':
 #     data = Data()
 #     ram = DataMemory(data, logger)

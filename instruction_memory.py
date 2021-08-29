@@ -51,14 +51,9 @@ class InstructionMemory(Block):
         # Pokud se program zacyklil na konci:
         if self.data.instruction == 0x6f:
             self.data.running = False
-            
-
-
-
 
         # if self.data.instruction == 0x00e7a023:
         #     input()
-
 
 # if __name__ == "__main__":
 #     instructionMemory = InstructionMemory("../APP.mhc", Data())

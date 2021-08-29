@@ -46,7 +46,7 @@ class Reader:
 
         if (self.inverted_x and not self.inverted_y) or self.inverted_y:
             for bit in range(0, self.BITS, 2):
-                data = self.swap_bits(data, bit, bit+1)
+                data = self.swap_bits(data, bit, bit + 1)
 
         return data
 

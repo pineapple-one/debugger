@@ -104,5 +104,4 @@ def restart():
 
 
 if __name__ == "__main__":
-        
     socketio.run(host="0.0.0.0", app=app, log_output=1)

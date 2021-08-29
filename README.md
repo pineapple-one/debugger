@@ -1,4 +1,4 @@
-# Debugger
+# Debugger/Emulator
 
 This is debugger/emulator for Pineapple ONE
 
@@ -17,4 +17,3 @@ This is debugger/emulator for Pineapple ONE
 ## Emulator
 
 - To start emulator just click on Pineapple logo
-

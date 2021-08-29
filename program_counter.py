@@ -39,7 +39,7 @@ class ProgramCounter(Block):
         """
 
         super().__init__(data)
-        self.actual_index = 0 # value X from Logisim = output to IM
+        self.actual_index = 0  # value X from Logisim = output to IM
         self.mode = 0
 
         assembly_guidance_file = open("programs/APP.lss")
@@ -48,11 +48,11 @@ class ProgramCounter(Block):
 
     def clock_up(self):
         # Výpočet ve sčítačce se provádí s každým clockem!
-        
+
         self.get_pc_mode()
 
         # [self.mode_1, self.mode_2, self.mode_3][self.mode+1]()
-        
+
         if self.data.PCE or (self.data.Branch and self.data.TAKE_BRANCH) or not self.data.PC_RTB_G:
             if self.mode == 1:
                 self.mode_1()
@@ -64,15 +64,15 @@ class ProgramCounter(Block):
                 self.mode_3()
 
             # if not self.data.PC_RTB_G:
-                # logger.info(f"PC_RTB_G enabled for writing to WB - value: {self.data.write_back}")
-                # self.data.write_back = self.actual_index # Zápiše vypočtenou adresu na Writeback
+            # logger.info(f"PC_RTB_G enabled for writing to WB - value: {self.data.write_back}")
+            # self.data.write_back = self.actual_index # Zápiše vypočtenou adresu na Writeback
 
             self.data.PC_to_IM = self.actual_index
             # PC_should_be = self.debug_data.get_value("PC", self.data.pulse_count)
             #
             # # self.assembly_guidance.fin
             # string_to_find = f"  {hex(self.actual_index)[2:]}:\t"
-            
+
             # for line in self.assembly_guidance:
             #     if string_to_find in line:
             #         # logger.info(f"new addr loaded: {hex(self.actual_index)}, m = {self.mode}, ins: \'{line.replace(string_to_find, '')[18:]}\', (should be: {PC_should_be})")
@@ -93,9 +93,9 @@ class ProgramCounter(Block):
         # if self.data.pulse_count == 265:
         #     # logger.info(f"200: Mode: {hex(self.actual_index)=}, {hex(value_y)=} > {self.actual_index + value_y}")
 
-        if self.data.PC_RTB_G:            
+        if self.data.PC_RTB_G:
             self.actual_index = (self.actual_index + value_y) & 0xffffffff
-        else: 
+        else:
             self.data.write_back = (self.actual_index + value_y) & 0xffffffff
 
     def mode_3(self) -> None:
@@ -117,9 +117,8 @@ class ProgramCounter(Block):
             self.mode = 2
 
         # (not self.data.PC_SRC_0 or self.data.TAKE_BRANCH or (not self.data.Branch or not self.data.TAKE_BRANCH)):
-        else: 
+        else:
             self.mode = 1
-
 
 # if __name__ == "__main__":
 #     import time

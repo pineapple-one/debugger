@@ -24,9 +24,8 @@ class Register(Block):
         if (self.data.MEM_LOAD or self.data.ALU_G) and self.data.uCounter == 0:
             # logger.info("Proběhla podmínka")
             self.stored_value = 0
-        
-        else:
 
+        else:
             if self.data.MEM_LOAD:
                 self.stored_value = self.data.ram_out
                 # logger.info(f"stored from RAM {self.stored_value},\t0b{bin(self.stored_value)[2:].zfill(32)}")
@@ -35,11 +34,11 @@ class Register(Block):
                 self.stored_value = self.data.alu_out
                 # logger.info(f"stored from ALU {self.stored_value},\t0b{bin(self.stored_value)[2:].zfill(32)}")
             #
-            if (not self.data.ALU_G and not self.data.MEM_LOAD) and not self.data.RF_STORE: # chyba!
+            if (not self.data.ALU_G and not self.data.MEM_LOAD) and not self.data.RF_STORE:  # chyba!
                 self.stored_value = 0
-            
+
             # logger.info(f"REG_RTB_G: {self.data.REG_RTB_G}  MEM_LOAD: {self.data.MEM_LOAD} ALU_G: {self.data.ALU_G}")
-        
+
     def paste(self):
         # logger.info(f"here, {self.data.REG_RTB_G=}, {self.data.SH_RTB_EN=}")
 

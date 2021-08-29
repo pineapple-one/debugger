@@ -18,7 +18,7 @@ class RegisterFile(Block):
 
     def __init__(self, data: Data) -> None:
         super().__init__(data)
-        
+
         self.registers = numpy.zeros(32)
 
         self.register_names = [
@@ -30,28 +30,28 @@ class RegisterFile(Block):
         self.write()
         self.read()
         self.mux()
-        
+
     def clock_down(self):
         self.read()
         self.mux()
 
     def write(self) -> None:
         write_register = self.data.instruction & 0b00000000000000000000111110000000  # 11-7        
-        write_to_register = write_register >> 7 
+        write_to_register = write_register >> 7
 
         if self.data.RF_STORE and write_to_register != 0:
             self.registers[write_to_register] = self.data.write_back
 
             self.data.read_register_1 = self.data.write_back
             self.data.read_register_2 = self.data.write_back
-            
+
             # write to reg 0x15 <-- 0x0000001
             # logger.info(f"write to reg {hex(write_to_register)} ({self.register_names[write_to_register]}) <-- 0x{hex(int(self.data.write_back))[2:].zfill(8)}")
-                # "write to reg " + hex(write_to_register) + " <-- 0x" + hex(self.data.write_back))
+            # "write to reg " + hex(write_to_register) + " <-- 0x" + hex(self.data.write_back))
 
     def read(self) -> None:
         write_register = self.data.instruction & 0b00000000000000000000111110000000  # 11-7        
-        write_to_register = write_register >> 7 
+        write_to_register = write_register >> 7
 
         # Read from - Instruction Memory - instruction
         read_register_1 = self.data.instruction & 0b00000000000011111000000000000000  # 19-15
@@ -65,7 +65,7 @@ class RegisterFile(Block):
 
         if self.data.RF_STORE and write_to_register != 0:
             self.data.read_register_2 = self.data.write_back
-        
+
         if not self.data.RF_STORE and not self.data.RF_LOAD:
             self.data.read_register_1 = 0b00000000000000000000000000000000
             self.data.read_register_2 = 0b00000000000000000000000000000000
@@ -93,7 +93,7 @@ class RegisterFile(Block):
             #
             # if RB1_should_be != self.data.read_register_2:
             #     # logger.error("RB1 error!!")
-                
+
             # logger.info("reg1: " + hex(read_register_1 >> 15) + " --> 0x" + hex(int(self.data.read_register_1)))
             # logger.info("reg2: " + hex(read_register_2 >> 20) + " --> 0x" + hex(int(self.data.read_register_2)))
 
@@ -105,7 +105,6 @@ class RegisterFile(Block):
             self.data.mux_out = self.data.immediate_value
             # slli x2 x2 1
             # 0x00111113
-
 
 # if __name__ == "__main__":
 #     RegisterFile(Data())

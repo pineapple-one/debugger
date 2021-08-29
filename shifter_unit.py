@@ -27,6 +27,7 @@ class ShifterUnit(Block):
 
     POZOR: Hazardní stav při posuvu nulou !!!
     """
+
     def __init__(self, data: Data) -> None:
         super().__init__(data)
         self.latched_value = 0
@@ -69,9 +70,9 @@ class ShifterUnit(Block):
                         # logger.info(f"shift to right by one > ({bin(self.internal_register)})")
 
                     elif self.i == 1:
-                        if self.internal_register & 2**31 != 0:
+                        if self.internal_register & 2 ** 31 != 0:
                             # logger.info("MSB detected")
-                            self.internal_register = ((self.internal_register >> 1) | (1 << 31))  & 0xffffffff
+                            self.internal_register = ((self.internal_register >> 1) | (1 << 31)) & 0xffffffff
                         else:
                             self.internal_register = (self.internal_register >> 1) & 0xffffffff
 
@@ -103,7 +104,8 @@ class ShifterUnit(Block):
                 self.ctr = 1
                 # logger.info(f"Initial SH load, counter +1 {self.ctr=}")
 
-            elif (what_to_do >> self.SH_BUSY) & 1 == 1 and self.data.SH_LOAD == 1 and (what_to_do >> self.OUT_EN) & 1 == 0:
+            elif (what_to_do >> self.SH_BUSY) & 1 == 1 and self.data.SH_LOAD == 1 and (
+                    what_to_do >> self.OUT_EN) & 1 == 0:
                 self.ctr += 1
                 # logger.info(f"internal counter = {self.ctr=}")
 
@@ -129,8 +131,8 @@ class ShifterUnit(Block):
 
         # VERZE 6.1
         if _L == 1:
-            if _F3 == 1:        # SLL
-                if _RS2 == 0:   # posun o nulu
+            if _F3 == 1:  # SLL
+                if _RS2 == 0:  # posun o nulu
                     out |= 1 << self.OUT_EN
                 # elif _RS2 == 1  and _CTR == 2:   # posun o jednicku -> problematický 0. krok
                 #     out |= 1 << SH_LEFT | 1 << SH_BUSY | 1 << SH_STR_EN
@@ -142,8 +144,8 @@ class ShifterUnit(Block):
                     if _CTR > 1:
                         out |= 1 << self.SH_STR_EN
                     out |= 1 << self.SH_LEFT | 1 << self.SH_BUSY
-                        
-            if _F3 == 5:       # SR (A or L)
+
+            if _F3 == 5:  # SR (A or L)
                 if _RS2 == 0:  # posun o nulu
                     out |= 1 << self.OUT_EN
                 elif _RS2 == (_CTR - 2):
